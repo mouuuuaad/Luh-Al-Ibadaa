@@ -30,13 +30,13 @@ function Header() {
         {/* Mobile Navigation */}
         <div className="flex w-[95%] justify-between items-center lg:hidden">
         <LoginLink postLoginRedirectURL="/dashboard">
-            <button className="px-8 w-[100px] py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-lg font-medium text-white shadow-xl hover:shadow-blue-500/30 transition-all">
+            <button className="px-8 w-[150px] py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-lg font-medium text-white shadow-xl hover:shadow-blue-500/30 transition-all">
               Login
             </button>
           </LoginLink>
 
           <RegisterLink>
-            <button className="px-8 w-[100px] py-4 rounded-xl border border-white/20 bg-white/5 text-lg font-medium text-white hover:bg-white/10 transition-all">
+            <button className="px-8 w-[150px] py-4 rounded-xl border border-white/20 bg-white/5 text-lg font-medium text-white hover:bg-white/10 transition-all">
               Register
             </button>
           </RegisterLink>
