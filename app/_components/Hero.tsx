@@ -49,9 +49,10 @@ function Hero() {
   // Mouse movement effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      const containerRef = useRef<HTMLDivElement | null>(null);
       if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
+const rect = containerRef.current.getBoundingClientRect();
+
       setMousePosition({
         x: (e.clientX - rect.left) / rect.width,
         y: (e.clientY - rect.top) / rect.height
