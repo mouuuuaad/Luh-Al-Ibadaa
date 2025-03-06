@@ -4,11 +4,11 @@ import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const controls = useAnimation();
-  const animationFrameId = useRef(null);
-  
-  const particlesRef = useRef(
+  const animationFrameId = useRef<number | null>(null);
+
+  const [particles, setParticles] = useState(
     Array.from({ length: 40 }, () => ({
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -47,47 +47,54 @@ function Hero() {
   const [currentFeature, setCurrentFeature] = useState(0);
 
   // Mouse movement effect
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!containerRef.current) return; // Null check
+    const rect = containerRef.current.getBoundingClientRect();
+    setMousePosition({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height
+    });
+  };
+
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const containerRef = useRef<HTMLDivElement | null>(null);
-      if (!containerRef.current) return;
-const rect = containerRef.current.getBoundingClientRect();
+    const container = containerRef.current;
+    if (!container) return; // Null check
 
-      setMousePosition({
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height
-      });
-    };
-
-    containerRef.current.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mousemove', handleMouseMove);
     return () => {
-      containerRef.current?.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
   // Particle animation
   useEffect(() => {
     const animateParticles = () => {
-      particlesRef.current = particlesRef.current.map(particle => {
-        let newX = particle.x + particle.speedX;
-        let newY = particle.y + particle.speedY;
+      setParticles(prevParticles =>
+        prevParticles.map(particle => {
+          let newX = particle.x + particle.speedX;
+          let newY = particle.y + particle.speedY;
 
-        if (newX > 100 || newX < 0) particle.speedX *= -1;
-        if (newY > 100 || newY < 0) particle.speedY *= -1;
+          if (newX > 100 || newX < 0) particle.speedX *= -1;
+          if (newY > 100 || newY < 0) particle.speedY *= -1;
 
-        return { 
-          ...particle,
-          x: Math.max(0, Math.min(100, newX)),
-          y: Math.max(0, Math.min(100, newY))
-        };
-      });
+          return { 
+            ...particle,
+            x: Math.max(0, Math.min(100, newX)),
+            y: Math.max(0, Math.min(100, newY))
+          };
+        })
+      );
 
       controls.start({ opacity: 1 });
       animationFrameId.current = requestAnimationFrame(animateParticles);
     };
 
     animateParticles();
-    return () => cancelAnimationFrame(animationFrameId.current);
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
   }, [controls]);
 
   // Feature carousel
@@ -107,7 +114,7 @@ const rect = containerRef.current.getBoundingClientRect();
     >
       {/* Animated Particles */}
       <div className="absolute inset-0 mix-blend-screen">
-        {particlesRef.current.map((particle, index) => (
+        {particles.map((particle, index) => (
           <motion.div
             key={`particle-${index}`}
             animate={{ 
@@ -167,13 +174,13 @@ const rect = containerRef.current.getBoundingClientRect();
         >
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400">
-            Unleash Your Creativity with
+              Unleash Your Creativity with
             </span>
             <br />
-            <span className="text-white/90">Luh Al-Ibdaa</span>
+            <span className="text-white/90">Luh Al-Ibadaa</span>
           </h1>
           <p className="text-xl text-white/70 max-w-2xl mx-auto">
-          Bring your vision to life with seamless collaboration and AI-enhanced tools.
+            Bring your vision to life with seamless collaboration and AI-enhanced tools.
           </p>
         </motion.div>
 
