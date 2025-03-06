@@ -30,10 +30,6 @@ function CreateTeam() {
   }
   return (
     <div className=' px-6 md:px-16 my-16'>
-      <Image src='/logo-black.png'
-      alt='logo'
-      width={200}
-      height={200}/>
       <div className='flex flex-col items-center mt-8'>
         <h2 className='font-bold text-[40px] py-3'>What should we call your team?</h2>
         <h2 className='text-gray-500'>You can always change this later from settings.</h2>
