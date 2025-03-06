@@ -1,84 +1,48 @@
-
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs'
 import Image from 'next/image'
 import React from 'react'
-
+import logo from "../../public/Logo.svg"
 function Header() {
   return (
-    <header className="bg-black">
-  <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-    <Image src='/logo.svg' alt='logo'
-    width={100}
-    height={100}
-    />
-
-    <div className="flex flex-1 items-center justify-end md:justify-between">
-      <nav aria-label="Global" className="hidden md:block">
-        <ul className="flex items-center gap-6 text-sm">
-          <li>
-            <a className="text-white transition hover:text-gray-100" href="#"> About </a>
-          </li>
-
-          <li>
-            <a className="text-white transition hover:text-gray-100/75" href="#"> Careers </a>
-          </li>
-
-          <li>
-            <a className="text-white transition hover:text-gray-100/75" href="#"> History </a>
-          </li>
-
-          <li>
-            <a className="text-white transition hover:text-gray-100/75" href="#"> Services </a>
-          </li>
-
-          <li>
-            <a className="text-white transition hover:text-gray-100/75" href="#"> Projects </a>
-          </li>
-
-        
-        </ul>
-      </nav>
-
-      <div className="flex items-center gap-4">
-        <div className="sm:flex sm:gap-4">
-          <div
-            className="block rounded-md  px-5 py-2.5 text-sm font-medium 
-            text-white transition "
-           
-          >
-            <LoginLink postLoginRedirectURL="/dashboard"> Login</LoginLink>
-          </div>
-
-          <div
-            className="hidden rounded-md bg-gray-100 
-            px-5 py-2.5 text-sm font-medium
-             text-black transition
-              hover:text-slate-800 sm:block"
-           
-          >
-          <RegisterLink>Register</RegisterLink>  
-          </div>
+    <header className="bg-gradient-to-t from-black to-slate-900 shadow-lg">
+      <div className="mx-auto flex h-20 max-w-screen-xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
+        <div className="hidden items-center lg:flex space-x-2">
+          <h1 className="text-3xl font-bold text-white">
+            Luh Al-Ibadaa<span className='text-blue-600 text-lg font-extrabold'>.</span>
+          </h1>
         </div>
 
-        <button
-          className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
-        >
-          <span className="sr-only">Toggle menu</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-4">
+          <LoginLink postLoginRedirectURL="/dashboard">
+            <button className="px-8 w-[150px] py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-lg font-medium text-white shadow-xl hover:shadow-blue-500/30 transition-all">
+              Login
+            </button>
+          </LoginLink>
+
+          <RegisterLink>
+            <button className="px-8 w-[150px] py-4 rounded-xl border border-white/20 bg-white/5 text-lg font-medium text-white hover:bg-white/10 transition-all">
+              Register
+            </button>
+          </RegisterLink>
+        </nav>
+
+        {/* Mobile Navigation */}
+        <div className="flex w-[95%] justify-between items-center lg:hidden">
+        <LoginLink postLoginRedirectURL="/dashboard">
+            <button className="px-8 w-[200px] py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-lg font-medium text-white shadow-xl hover:shadow-blue-500/30 transition-all">
+              Login
+            </button>
+          </LoginLink>
+
+          <RegisterLink>
+            <button className="px-8 w-[200px] py-4 rounded-xl border border-white/20 bg-white/5 text-lg font-medium text-white hover:bg-white/10 transition-all">
+              Register
+            </button>
+          </RegisterLink>
+        </div>
       </div>
-    </div>
-  </div>
-</header>
+    </header>
   )
 }
 

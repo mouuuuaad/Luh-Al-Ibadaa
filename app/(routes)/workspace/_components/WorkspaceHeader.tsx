@@ -7,11 +7,9 @@ function WorkspaceHeader({onSave}:any) {
   return (
     <div className='p-3 border-b flex justify-between items-center'>
       <div className='flex gap-2 items-center'>
-        <Image src={'/logo-1.png'}
-          alt='logo'
-          height={40}
-          width={40} />
-        <h2>File Name</h2>
+      <a className='flex border px-3 py-1.5 rounded-md items-center gap-2 font-normal' href='http://localhost:3000/dashboard'>
+          back to dashboard
+        </a>
       </div>
       <div className='flex items-center gap-4'>
         <Button className='h-8 text-[12px]
